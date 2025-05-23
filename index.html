@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=https://www.netflix.com/clearcookies" />
+    <meta charset="UTF-8" />
+    <title>Redirecting to Netflix</title>
     <script>
-      // Step 1: clear cookies
-      setTimeout(() => {
-        window.location.href = "https://www.netflix.com/id-en/login?nextpage=%2Fpassword";
-      }, 2000); // tunggu 2 detik agar clearcookies selesai
+      function getStep() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("step");
+      }
+
+      const step = getStep();
+
+      if (!step) {
+        // Tahap pertama: logout, lalu kembali ke halaman ini dengan step=login
+        window.location.href = "https://www.netflix.com/logout?nextpage=https://username.github.io/netflix-redirect/?step=login";
+      } else if (step === "login") {
+        // Tahap kedua: login, lalu langsung ke halaman ubah password
+        window.location.href = "https://www.netflix.com/login?nextpage=%2Fpassword";
+      }
     </script>
   </head>
   <body>
-    Redirecting to Netflix...
+    Redirecting, please wait...
   </body>
 </html>
