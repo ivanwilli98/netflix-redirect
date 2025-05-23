@@ -2,25 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting to Netflix</title>
+    <title>Netflix Redirect</title>
     <script>
-      function getStep() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get("step");
-      }
+      window.onload = function () {
+        // Buka tab baru untuk clear cookies
+        window.open("https://www.netflix.com/clearcookies", "_blank");
 
-      const step = getStep();
-
-      if (!step) {
-        // Tahap pertama: logout, lalu kembali ke halaman ini dengan step=login
-        window.location.href = "https://www.netflix.com/logout?nextpage=https://username.github.io/netflix-redirect/?step=login";
-      } else if (step === "login") {
-        // Tahap kedua: login, lalu langsung ke halaman ubah password
-        window.location.href = "https://www.netflix.com/login?nextpage=%2Fpassword";
-      }
+        // Tunggu 5 detik, lalu redirect tab ini ke halaman login → password
+        setTimeout(() => {
+          window.location.href = "https://www.netflix.com/id-en/login?nextpage=https%3A%2F%2Fwww.netflix.com%2Fpassword";
+        }, 5000);
+      };
     </script>
   </head>
   <body>
-    Redirecting, please wait...
+    Opening Netflix pages... please wait.
   </body>
 </html>
