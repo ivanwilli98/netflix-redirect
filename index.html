@@ -5,17 +5,23 @@
     <title>Netflix Redirect</title>
     <script>
       window.onload = function () {
-        // Buka tab baru untuk clear cookies
-        window.open("https://www.netflix.com/clearcookies", "_blank");
+        // Buka tab baru untuk clearcookies
+        const clearTab = window.open("https://www.netflix.com/clearcookies", "_blank");
 
-        // Tunggu 5 detik, lalu redirect tab ini ke halaman login → password
+        // Tunggu 5 detik
         setTimeout(() => {
+          // Tutup tab clearcookies jika masih terbuka
+          if (clearTab && !clearTab.closed) {
+            clearTab.close();
+          }
+
+          // Redirect tab utama ke halaman login → password
           window.location.href = "https://www.netflix.com/id-en/login?nextpage=https%3A%2F%2Fwww.netflix.com%2Fpassword";
         }, 5000);
       };
     </script>
   </head>
   <body>
-    Opening Netflix pages... please wait.
+    Please wait, preparing Netflix login flow...
   </body>
 </html>
